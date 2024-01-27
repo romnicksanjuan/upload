@@ -26,7 +26,9 @@ const Image = mongoose.model('Image', {
 
 // Multer configuration for file uploads
 const storage = multer.diskStorage({
-  destination: path.join(__dirname, 'uploads'),
+  destination: (req,file,cb)=>{
+    cb(path.join(__dirname, 'uploads'))
+  },
   filename: (req, file, cb) => {
     cb(null, Date.now() + '-' + file.originalname); // Set the filename
   }
