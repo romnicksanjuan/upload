@@ -15,6 +15,10 @@ app.use(cors(
   }
   
 ))
+// Serve uploaded files statically (optional)
+app.use('/upload', express.static(path.join(__dirname, "uploads")));
+
+
 // Connect to MongoDB (replace 'your-mongodb-uri' with your actual MongoDB connection string)
 mongoose.connect('mongodb+srv://romnick:1234@romnickdb.e14diyv.mongodb.net/up', { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -37,7 +41,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // POST endpoint for file upload
-app.post('/uploads', upload.single('file'), async (req, res) => {
+app.post('/', upload.single('file'), async (req, res) => {
   // Access uploaded image details using req.file
   console.log(req.file.filename)
   // Save image details to MongoDB
@@ -50,8 +54,7 @@ app.post('/uploads', upload.single('file'), async (req, res) => {
   res.json({ message: 'Image uploaded successfully' });
 });
 
-// Serve uploaded files statically (optional)
-app.use('/upload', express.static(path.join(__dirname, "uploads")));
+
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

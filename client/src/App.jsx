@@ -8,7 +8,7 @@ function FileUpload() {
     const formData = new FormData();
     formData.append('file', file);
 
-    axios.post('https://upload-server-khaki.vercel.app/uploads', formData)
+    axios.post('https://upload-server-khaki.vercel.app/', formData)
       .then(response => console.log(response.data))
       .catch(error => console.error('Error:', error));
   };
