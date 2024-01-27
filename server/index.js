@@ -6,7 +6,15 @@ const cors = require('cors')
 
 const app = express();
 const port = 3001;
-app.use(cors())
+app.use(cors(
+  
+    {
+      origin: ["https://upload-six-pi.vercel.app/"],
+      methods: ["POST", "GET"],
+      credentials: true
+  }
+  
+))
 // Connect to MongoDB (replace 'your-mongodb-uri' with your actual MongoDB connection string)
 mongoose.connect('mongodb+srv://romnick:1234@romnickdb.e14diyv.mongodb.net/up', { useNewUrlParser: true, useUnifiedTopology: true });
 
